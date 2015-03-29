@@ -70,6 +70,8 @@ public abstract class DescriptionModifyingDecorator implements StoreService {
         StudyDescriptionModifier modifierConfig = archiveDevice.getApplicationEntity(localAET).getAEExtension(StudyDescriptionModifier.class);
 
         // initialize if extension not exists (like a singleton)
+        // this is just a demo of how to update the configuration programmatically - most decorators should not do that
+        // (i.e. they should access the config read-only)
         if (modifierConfig == null) {
 
             modifierConfig = new StudyDescriptionModifier();
