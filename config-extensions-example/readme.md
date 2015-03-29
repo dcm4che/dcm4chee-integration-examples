@@ -1,6 +1,13 @@
 This is an example of how vendor components can extend configuration and use it in decorators of dcm4che archive.
 
-Steps a nutshell:
+### How to deploy and see the sample in action
+
+- Copy the jar to the `lib` folder of the archive.
+- Add `<class>com.mysamplecompany.examples.DescriptionModifyingDecorator</class>` to beans.xml of dcm4chee-arc-store.
+- Shoot some study at the archive.
+- Check the log and description of the stored study
+
+### Theoretical part in a nutshell
 
 1. Create a class that extends `CommonAEExtension`/`CommonDeviceExtension`/`CommonHL7AppExtension` and
 annotate it with `ConfigurableClass` and `ConfigurableProperty` annotations. Don't forget properly named getters/setters.
