@@ -30,7 +30,7 @@ public abstract class DescriptionModifyingDecorator implements StoreService {
 
     @Inject
     @Delegate
-    private StoreService storeService;
+    private StoreService delegate;
 
     @Inject
     DicomConfiguration config;
@@ -63,6 +63,7 @@ public abstract class DescriptionModifyingDecorator implements StoreService {
 
     @Override
     public void coerceAttributes(StoreContext context) throws DicomServiceException {
+
         String localAET = context.getStoreSession().getLocalAET();
         log.warn("Found local AET: {}", localAET);
 
@@ -101,6 +102,9 @@ public abstract class DescriptionModifyingDecorator implements StoreService {
         String studyDescription = attributes.getString(Tag.StudyDescription);
         studyDescription = getModifiedDescription(studyDescription, modifierConfig);
         attributes.setString(Tag.StudyDescription, ElementDictionary.vrOf(Tag.StudyDescription, null), studyDescription);
+
+        // proceed with coercion
+        delegate.coerceAttributes(context);
 
     }
 }
