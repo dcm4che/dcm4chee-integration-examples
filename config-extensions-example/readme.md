@@ -2,9 +2,11 @@ This is an example of how vendor components can extend configuration and use it 
 
 ### How to deploy and see the sample in action
 
-- Copy the jar to the `lib` folder of the archive.
+- Build the `config-extensions-example` project with simple `mvn install` 
+- Copy the produced jar to the `lib` folder of the archive war/ear.
 - Add `<class>com.mysamplecompany.examples.DescriptionModifyingDecorator</class>` to beans.xml of dcm4chee-arc-store.
-- Shoot some study at the archive.
+- Re/start the archive
+- Shoot some study at the archive
 - Check the log and description of the stored study
 
 ### Theoretical part in a nutshell
