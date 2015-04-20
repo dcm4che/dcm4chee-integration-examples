@@ -7,8 +7,10 @@ import org.dcm4che3.data.ElementDictionary;
 import org.dcm4che3.data.Tag;
 import org.dcm4che3.net.Device;
 import org.dcm4che3.net.service.DicomServiceException;
+import org.dcm4chee.archive.store.DelegatingStoreService;
 import org.dcm4chee.archive.store.StoreContext;
 import org.dcm4chee.archive.store.StoreService;
+import org.dcm4chee.conf.cdi.dynamicdecorators.DynamicDecorator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,15 +24,11 @@ import javax.inject.Inject;
  *
  * @author Roman K
  */
-@Decorator
-public abstract class DescriptionModifyingDecorator implements StoreService {
+@DynamicDecorator
+public class DescriptionModifyingDecorator extends DelegatingStoreService {
 
     private static Logger log = LoggerFactory
             .getLogger(DescriptionModifyingDecorator.class);
-
-    @Inject
-    @Delegate
-    private StoreService delegate;
 
     @Inject
     DicomConfiguration config;
@@ -104,7 +102,7 @@ public abstract class DescriptionModifyingDecorator implements StoreService {
         attributes.setString(Tag.StudyDescription, ElementDictionary.vrOf(Tag.StudyDescription, null), studyDescription);
 
         // proceed with coercion
-        delegate.coerceAttributes(context);
+        getDelegate().coerceAttributes(context);
 
     }
 }
